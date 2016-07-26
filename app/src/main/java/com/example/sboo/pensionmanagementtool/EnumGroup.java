@@ -5,6 +5,5 @@ package com.example.sboo.pensionmanagementtool;
  */
 
 enum FragmentType {
-    MainFragment =0,
-
+    MainFragment,HomeMngFragment
 }

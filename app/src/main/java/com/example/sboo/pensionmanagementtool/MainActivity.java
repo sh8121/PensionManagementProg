@@ -1,19 +1,27 @@
 package com.example.sboo.pensionmanagementtool;
 
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Fragment fragment;
+    MainFragment mainFragment;
+    HomeMngFragment homeMngFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragment = (Fragment)getSupportFragmentManager().findFragmentById(R.id.fragment);
+        mainFragment = (MainFragment)getSupportFragmentManager().findFragmentById(R.id.mainFragment);
+        homeMngFragment = new HomeMngFragment();
     }
 
-    public void onFragmentChanged()
+    public void onFragmentChanged(FragmentType fragmentType){
+        if(fragmentType == FragmentType.MainFragment){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mainFragment).commit();
+        }
+        else if(fragmentType == FragmentType.HomeMngFragment){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, homeMngFragment).commit();
+        }
+    }
 }
