@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -21,27 +23,45 @@ public class MainFragment extends Fragment {
     Button goImageMngButton;
     Button goTourInfoMngbutton;
 
+    MainActivity mainActivity;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Toast.makeText(getActivity().getApplicationContext(), "MainFragment OnCreate 호출", Toast.LENGTH_LONG).show(); //테스트 코드
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Toast.makeText(getActivity().getApplicationContext(), "MainFragment OnCreateView 호출", Toast.LENGTH_LONG).show(); //테스트 코드
         rootView = (ViewGroup)inflater.inflate(R.layout.fragment_main, container, false);
 
         goHomeMngButton = (Button)rootView.findViewById(R.id.goHomeMngButton);
         goImageMngButton = (Button)rootView.findViewById(R.id.goImageMngButton);
         goTourInfoMngbutton = (Button)rootView.findViewById(R.id.goTourInfoMngButton);
+        mainActivity = (MainActivity)getActivity();
 
         goHomeMngButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity activity = (MainActivity)getActivity();
-                activity.onFragmentChanged(FragmentType.HomeMngFragment);
+
+                Animation shakeAnim = AnimationUtils.loadAnimation(mainActivity.getApplicationContext(),R.anim.shake);
+                shakeAnim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        mainActivity.onFragmentChanged(FragmentType.HomeMngFragment);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                goHomeMngButton.startAnimation(shakeAnim);
             }
         });
 

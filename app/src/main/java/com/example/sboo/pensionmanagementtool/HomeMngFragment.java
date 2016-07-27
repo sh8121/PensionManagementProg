@@ -20,14 +20,12 @@ public class HomeMngFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Toast.makeText(getActivity().getApplicationContext(), "HomeMngFragment onCreate 호출", Toast.LENGTH_LONG).show();
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Toast.makeText(getActivity().getApplicationContext(), "HomeMngFragment onCreateView 호출", Toast.LENGTH_LONG).show();
         rootView = (ViewGroup)inflater.inflate(R.layout.fragment_homemng, container, false);
 
         goHomeFromHomeMngButton = (Button)rootView.findViewById(R.id.goHomeFromHomeMngButton);
